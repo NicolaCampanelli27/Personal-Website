@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="dt.title">Nicola | Projects and papers in depth</title>
+<meta name="description" content="In-depth look at Nicola Campanelli's two papers on reinforcement learning for hybrid vehicles and long-duration battery storage, plus his solar PV project." data-i18n-attr="content:dt.desc">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-page="details">
+
+<header class="page-hero" id="top">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="wrap">
+    <h1 data-i18n="dt.h1">Projects and papers, in depth</h1>
+    <p data-i18n="dt.sub">The longer story behind the cards on the main page: what I asked, how I tried to answer, and what the numbers said.</p>
+    <div class="jump">
+      <a href="#sac" data-i18n="dt.j1">Hybrid car + AI</a>
+      <a href="#battery" data-i18n="dt.j2">Battery storage</a>
+      <a href="#pv" data-i18n="dt.j3">Solar PV</a>
+      <a href="index.html#projects" data-i18n="dt.back">Back to the main page</a>
+    </div>
+  </div>
+</header>
+
+<main class="with-toc">
+<aside class="toc" id="toc" data-i18n-attr="aria-label:dt.toc" aria-label="On this page"><p class="toc-h" data-i18n="dt.toc">On this page</p><div id="toc-list"></div></aside>
+
+<!-- ===================== SAC PAPER ===================== -->
+<section class="detail" id="sac" data-toc="dt.j1">
+  <div class="wrap">
+    <div class="d-top reveal"><span class="tagline" data-i18n="dt.sac.tag">Paper, 2024</span></div>
+    <h2 class="reveal" data-i18n="dt.sac.h">Teaching a hybrid car to save fuel</h2>
+    <p class="d-meta reveal" data-i18n="dt.sac.meta">L. Rolando, N. Campanelli, L. Tresca, L. Pulvirenti and F. Millo. "Development of a Soft-Actor Critic Reinforcement Learning Algorithm for the Energy Management of a Hybrid Electric Vehicle". SAE Technical Paper 2024-37-0011, Politecnico di Torino.</p>
+    <div class="btn-row reveal">
+      <div class="has-pop" data-persist="1">
+        <a class="btn btn-line" href="https://doi.org/10.4271/2024-37-0011" target="_blank" rel="noopener" data-i18n="ix.doi">Read the paper (DOI)</a>
+        <div class="pop" role="note" data-i18n-html="dt.paywall2"><b>:)</b> Paywall in the way? If you're interested, just ask and I'll gladly send you the paper. <a href="index.html?prefill=sac#contact">Ask for a copy</a></div>
+      </div>
+      <a class="btn btn-dark" href="index.html#pub-sac" data-i18n="dt.seecard">See it on the main page</a>
+    </div>
+
+    <div class="stats stagger" style="margin-top:34px">
+      <div class="stat reveal"><b>8.6%</b><span data-i18n="dt.sac.s1">more fuel than the theoretical best on the WLTC, with the battery ending at the target charge</span></div>
+      <div class="stat reveal"><b>10</b><span data-i18n="dt.sac.s2">reward configurations trained and compared (5 for each of 2 rewards)</span></div>
+      <div class="stat reveal"><b>3</b><span data-i18n="dt.sac.s3">driving cycles: one to train on, two the agent had never seen</span></div>
+      <div class="stat reveal"><b>5</b><span data-i18n="dt.sac.s4">things the agent observes: speed, power demand, gearbox speed, battery charge, trip progress</span></div>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.sac.a.h">The problem</h3>
+    <div class="prose reveal">
+      <p data-i18n="dt.sac.a.p1">A plug-in hybrid has two ways to move: the engine and the electric motor. At every instant, a controller called the Energy Management System (EMS) decides how to split the work. That choice decides how much fuel the car burns.</p>
+      <p data-i18n="dt.sac.a.p2">Dynamic Programming (DP) finds the mathematically best split, but it needs to know the whole trip in advance and a lot of computing time, so a car cannot use it live. Simple rule-based controllers run in real time, but they are usually far from optimal. Reinforcement learning (RL) offers a third way: an agent learns by trial and error, then runs in real time. The question of this paper: how close to the DP optimum can it get?</p>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.sac.b.h">The vehicle</h3>
+    <div class="two">
+      <div class="prose reveal rv-left">
+        <p data-i18n="dt.sac.b.p1">The test vehicle is a state-of-the-art diesel plug-in hybrid sold in Europe, with a parallel P2 architecture: the engine and the electric motor both feed a 9-speed automatic gearbox that drives the rear axle.</p>
+        <p data-i18n="dt.sac.b.p2">Training an agent takes hundreds of simulated cycles, so the original digital twin was simplified to a fast backward-kinematic model in Python and validated against experimental data from the real car.</p>
+      </div>
+      <table class="spec reveal rv-right">
+        <caption data-i18n="dt.sac.b.cap">Vehicle and powertrain</caption>
+        <tbody>
+          <tr><th data-i18n="dt.sac.b.r1">Curb weight</th><td>2060 kg</td></tr>
+          <tr><th data-i18n="dt.sac.b.r2">Engine</th><td data-i18n="dt.sac.b.v2">1950 cm³ turbo diesel, 4 cylinders, 143 kW</td></tr>
+          <tr><th data-i18n="dt.sac.b.r3">Electric motor</th><td data-i18n="dt.sac.b.v3">Permanent-magnet synchronous, 90 kW / 440 Nm</td></tr>
+          <tr><th data-i18n="dt.sac.b.r4">Transmission</th><td data-i18n="dt.sac.b.v4">9-speed automatic with torque converter</td></tr>
+          <tr><th data-i18n="dt.sac.b.r5">Battery</th><td data-i18n="dt.sac.b.v5">Li-NMC, 13.5 kWh, 365 V</td></tr>
+          <tr><th data-i18n="dt.sac.b.r6">Layout</th><td data-i18n="dt.sac.b.v6">Rear-wheel drive, parallel P2</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.sac.c.h">How the agent learns</h3>
+    <div class="prose reveal">
+      <p data-i18n="dt.sac.c.p1">The agent is a Soft Actor-Critic (SAC). It has two parts: an actor that proposes what to do, and a critic that judges how good that was. Its actor is stochastic: for each situation it outputs a bell curve of possible actions, which keeps it exploring instead of getting stuck. After training, the randomness is switched off and the agent acts deterministically.</p>
+    </div>
+    <figure class="fig dg reveal rv-zoom">
+      <h4 data-i18n="dt.sac.c.fig">The learning loop</h4>
+      <svg viewBox="0 0 760 290" role="img" data-i18n-attr="aria-label:dt.sac.c.alt" aria-label="Diagram of the learning loop: the SAC agent sends an engine torque action to the vehicle digital twin, which returns a reward and the new state.">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#1B3A6B"/></marker></defs>
+        <g class="node"><rect x="20" y="70" width="210" height="120" rx="18" fill="#1B3A6B"/>
+          <text x="125" y="118" text-anchor="middle" class="wh" data-i18n="dt.d1.agent">SAC agent</text>
+          <text x="125" y="142" text-anchor="middle" class="sm wh" data-i18n="dt.d1.agent2">actor + critic</text>
+          <text x="125" y="162" text-anchor="middle" class="sm wh" data-i18n="dt.d1.agent3">neural networks</text></g>
+        <g class="node"><rect x="530" y="70" width="210" height="120" rx="18" fill="#D8341F"/>
+          <text x="635" y="118" text-anchor="middle" class="wh" data-i18n="dt.d1.env">Digital twin</text>
+          <text x="635" y="142" text-anchor="middle" class="sm wh" data-i18n="dt.d1.env2">of the hybrid car</text>
+          <text x="635" y="162" text-anchor="middle" class="sm wh" data-i18n="dt.d1.env3">Python, Gymnasium</text></g>
+        <line class="flow" x1="236" y1="104" x2="522" y2="104" stroke="#1B3A6B" stroke-width="3" marker-end="url(#ah)"/>
+        <text x="380" y="88" text-anchor="middle" data-i18n="dt.d1.act">Action: engine torque</text>
+        <text x="380" y="126" text-anchor="middle" class="sm" data-i18n="dt.d1.act2">(as a share of the maximum)</text>
+        <line class="flow" x1="524" y1="160" x2="238" y2="160" stroke="#D8341F" stroke-width="3" marker-end="url(#ah)" style="--c:red"/>
+        <text x="380" y="150" text-anchor="middle" data-i18n="dt.d1.rew">Reward + new state</text>
+        <text x="380" y="184" text-anchor="middle" class="sm" data-i18n="dt.d1.rew2">fuel burned, battery charge...</text>
+        <rect x="20" y="226" width="720" height="44" rx="12" fill="#DCE7F3"/>
+        <text x="380" y="253" text-anchor="middle" data-i18n="dt.d1.states">The agent sees: vehicle speed · power demand · gearbox speed · battery charge · distance travelled</text>
+      </svg>
+      <p class="cap" data-i18n-html="dt.d1.cap"><b>Trial and error, hundreds of times.</b> Every driving cycle is one episode. The agent tries torque values, receives a reward and slowly learns which ones lead to lower fuel use. The "distance travelled" input needs no connected car: a phone's GPS is enough.</p>
+    </figure>
+
+    <h3 class="sub reveal" data-i18n="dt.sac.d.h">Two ways to reward the agent</h3>
+    <div class="prose reveal">
+      <p data-i18n="dt.sac.d.p1">In RL the reward is everything: a poorly designed one gives poor results no matter how long you train. The goal is minimum fuel while ending the cycle with the same battery charge it started with (charge sustaining). RL cannot enforce that as a hard constraint like DP does, so the reward has to do it.</p>
+    </div>
+    <div class="two">
+      <div class="reveal rv-left">
+        <h4 style="font-family:var(--display);font-size:1.15rem" data-i18n="dt.sac.d.c1">Case 1: always nudge towards the target</h4>
+        <div class="formula">r = k<sub>1</sub> − k<sub>2</sub>·ṁ<sub>f</sub>·Δt − k<sub>3</sub>·(SoC − SoC<sub>trg</sub>)²<small data-i18n="dt.sac.d.f1">Penalizes fuel flow and any distance of the battery charge (SoC) from the target.</small></div>
+      </div>
+      <div class="reveal rv-right">
+        <h4 style="font-family:var(--display);font-size:1.15rem" data-i18n="dt.sac.d.c2">Case 2: free inside a band</h4>
+        <div class="formula">r = k<sub>1</sub> − (k<sub>2</sub>·ṁ<sub>f</sub> + k<sub>3</sub>·P<sub>SoC</sub>)·Δt<small data-i18n="dt.sac.d.f2">The SoC penalty P_SoC is zero while the charge stays between two boundary lines, and grows only outside them.</small></div>
+      </div>
+    </div>
+    <div class="prose reveal">
+      <p data-i18n="dt.sac.d.p2">Case 2 lets the agent use the battery freely as long as it stays in the band. In the last third of the cycle the band narrows, nudging the agent to end at the target charge. For each reward, the weight k₃ was swept over five values (200 to 400 with k₂ fixed at 200), giving the 10 trained agents.</p>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.sac.e.h">What came out</h3>
+    <div class="prose reveal">
+      <p data-i18n="dt.sac.e.p1">All ten agents kept the battery close to the target. The best one, Case 2 with k₃ = 300 (called 2C in the paper), balanced a near-perfect final charge with low fuel use. It was then tested against DP on the training cycle (WLTC) and on two cycles it had never seen: the urban FTP75 and the highway HFET.</p>
+    </div>
+    <div>
+      <figure class="fig reveal">
+        <h4 data-i18n="dt.sac.e.f1">Fuel consumption, SAC vs. the optimum</h4>
+        <div class="cj" data-chart="sac-fuel"></div>
+        <p class="cap" data-i18n-html="dt.sac.e.c1"><b>Lower is better.</b> DP is the theoretical best for a perfectly charge-sustaining trip.</p>
+      </figure>
+      <figure class="fig reveal">
+        <h4 data-i18n="dt.sac.e.f2">Gap versus the optimum</h4>
+        <div class="cj" data-chart="sac-gap"></div>
+        <p class="cap" data-i18n-html="dt.sac.e.c2"><b>Fuel difference from DP.</b> The HFET "win" comes with a battery that ended 2% below target, so it is not a real gain.</p>
+      </figure>
+    </div>
+    <table class="spec reveal" style="margin-top:6px">
+      <caption data-i18n="dt.sac.e.cap">Final battery charge (SoC) at the end of each cycle</caption>
+      <thead><tr><th data-i18n="dt.sac.e.t0">Controller</th><th>WLTC</th><th>FTP75</th><th>HFET</th></tr></thead>
+      <tbody>
+        <tr><th data-i18n="dt.sac.e.t1">DP (target 0.50)</th><td>0.50</td><td>0.50</td><td>0.50</td></tr>
+        <tr><th data-i18n="dt.sac.e.t2">SAC agent</th><td>0.50</td><td>0.52</td><td>0.48</td></tr>
+      </tbody>
+    </table>
+    <div class="prose reveal" style="margin-top:20px">
+      <ul>
+        <li data-i18n-html="dt.sac.e.l1"><b>Different strategy, similar result.</b> The agent drains the battery more at the start of the cycle and relies more on the electric motor, then uses the engine to recharge later, while DP keeps the charge steadier.</li>
+        <li data-i18n-html="dt.sac.e.l2"><b>Where it loses.</b> The agent's engine operating points are more scattered on the efficiency map, including inefficient low-load points, while DP stays closer to the optimal operating line.</li>
+        <li data-i18n-html="dt.sac.e.l3"><b>The urban cycle is harder.</b> On FTP75 the fuel use was 17.5% above DP and the charge ended 2% high. The extra charge explains part of it, not all.</li>
+      </ul>
+    </div>
+    <div class="callout reveal"><span data-i18n-html="dt.sac.e.call"><b>Honest reading.</b> The agent never saw FTP75 or HFET during training and stayed within about 17.5% of the optimum on both, without perfect charge sustainability. That is encouraging for a first, untuned version, and it is exactly where the next steps start.</span></div>
+
+    <h3 class="sub reveal" data-i18n="dt.sac.f.h">Training setup</h3>
+    <div class="two">
+      <table class="spec reveal rv-left">
+        <caption data-i18n="dt.sac.f.cap">Main hyperparameters (both networks)</caption>
+        <tbody>
+          <tr><th data-i18n="dt.sac.f.r1">Discount factor</th><td>0.99</td></tr>
+          <tr><th data-i18n="dt.sac.f.r2">Hidden layers</th><td data-i18n="dt.sac.f.v2">2 × 256 neurons</td></tr>
+          <tr><th data-i18n="dt.sac.f.r3">Learning rate</th><td>0.0003</td></tr>
+          <tr><th data-i18n="dt.sac.f.r4">Mini-batch size</th><td>256</td></tr>
+          <tr><th data-i18n="dt.sac.f.r5">Soft-update coefficient</th><td>0.005</td></tr>
+        </tbody>
+      </table>
+      <div class="prose reveal rv-right">
+        <p data-i18n="dt.sac.f.p1">The hyperparameters were kept fixed on purpose, so that any difference in results comes from the reward and not from tuning. A model was saved every 20 episodes.</p>
+        <p data-i18n="dt.sac.f.p2">Tools: a Python environment built to the Gymnasium standard, the SAC implementation from Stable-Baselines3, and an open-source MATLAB Dynamic Programming code from ETH Zurich for the benchmark.</p>
+      </div>
+    </div>
+    <h3 class="sub reveal" data-i18n="dt.sac.g.h">What's next</h3>
+    <div class="prose reveal"><p data-i18n="dt.sac.g.p">Tune the hyperparameters of the networks, extend the agent to charge-depleting operation, train it over many driving cycles representing different patterns, and eventually run the approach on a high-fidelity forward-dynamics model of the car.</p></div>
+    <div class="btn-row back"><a class="btn btn-line" href="index.html#proj-sac" data-i18n="dt.backproj">Back to the project card</a></div>
+  </div>
+</section>
+
+<!-- ===================== BATTERY PAPER ===================== -->
+<section class="detail alt" id="battery" data-toc="dt.j2">
+  <div class="wrap">
+    <div class="d-top reveal"><span class="tagline red" data-i18n="dt.bat.tag">Paper, 2026</span></div>
+    <h2 class="reveal" data-i18n="dt.bat.h">Is a battery storage worth it?</h2>
+    <p class="d-meta reveal" data-i18n="dt.bat.meta">N. Campanelli and M. D'Arpino. "Optimal control and techno-economic analysis of long-duration battery energy storage system applications". Journal of Energy Storage, vol. 164, 2026. The Ohio State University.</p>
+    <div class="btn-row reveal">
+      <div class="has-pop" data-persist="1">
+        <a class="btn btn-line" href="https://doi.org/10.1016/j.est.2026.121863" target="_blank" rel="noopener" data-i18n="ix.doi">Read the paper (DOI)</a>
+        <div class="pop" role="note" data-i18n-html="dt.paywall1"><b>:)</b> Paywall in the way? If you're interested, just ask and I'll gladly send you the paper. <a href="index.html?prefill=battery#contact">Ask for a copy</a></div>
+      </div>
+      <a class="btn btn-dark" href="index.html#pub-battery" data-i18n="dt.seecard">See it on the main page</a>
+    </div>
+
+    <div class="stats stagger" style="margin-top:34px">
+      <div class="stat reveal"><b>32.4%</b><span data-i18n="dt.bat.s1">lower yearly electricity bill with a battery plus wind power</span></div>
+      <div class="stat reveal"><b>20.4%</b><span data-i18n="dt.bat.s2">lower bill with the battery alone, thanks to cheaper charging and fewer demand peaks</span></div>
+      <div class="stat reveal"><b>5</b><span data-i18n="dt.bat.s3">scenarios, all built on real data from a building, a wind turbine and the market</span></div>
+      <div class="stat reveal"><b>$0.23</b><span data-i18n="dt.bat.s4">per kWh to store energy in the standalone case, against a 2030 target of $0.05</span></div>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.bat.a.h">The question</h3>
+    <div class="prose reveal">
+      <p data-i18n="dt.bat.a.p1">Long-duration batteries can hold energy for 10 hours or more. They promise to cut electricity bills, back up renewables and help the grid, but they are expensive. Is the investment worth it?</p>
+      <p data-i18n="dt.bat.a.p2">The usual tool to compare storage costs is the Levelized Cost of Storage (LCOS): the price at which each stored kWh must be sold to repay the project. Traditional calculators assume the battery cycles at a constant rate with a constant efficiency and a fixed energy price. Real batteries do not behave like that: they charge when power is cheap and discharge when it is expensive or when the building peaks.</p>
+      <p data-i18n="dt.bat.a.p3">The contribution of this work is to put the optimal control of the battery inside the cost analysis, so the LCOS is computed from how the battery would actually be operated.</p>
+    </div>
+
+    <figure class="fig dg reveal rv-zoom">
+      <h4 data-i18n="dt.bat.b.fig">The method, end to end</h4>
+      <svg viewBox="0 0 760 210" role="img" data-i18n-attr="aria-label:dt.bat.b.alt" aria-label="Flow diagram: real data feeds a plant and battery model, an optimal control block, an energy cost calculator and finally the levelized cost of storage.">
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#1B3A6B"/></marker></defs>
+        <g class="node"><rect x="6" y="40" width="130" height="110" rx="16" fill="#DCE7F3"/>
+          <text x="71" y="82" text-anchor="middle" data-i18n="dt.d2.1a">Real data</text>
+          <text x="71" y="104" text-anchor="middle" class="sm" data-i18n="dt.d2.1b">building load</text>
+          <text x="71" y="122" text-anchor="middle" class="sm" data-i18n="dt.d2.1c">wind, prices</text></g>
+        <g class="node"><rect x="157" y="40" width="130" height="110" rx="16" fill="#1B3A6B"/>
+          <text x="222" y="82" text-anchor="middle" class="wh" data-i18n="dt.d2.2a">Plant model</text>
+          <text x="222" y="104" text-anchor="middle" class="sm wh" data-i18n="dt.d2.2b">battery cells,</text>
+          <text x="222" y="122" text-anchor="middle" class="sm wh" data-i18n="dt.d2.2c">limits, losses</text></g>
+        <g class="node"><rect x="308" y="40" width="144" height="110" rx="16" fill="#D8341F"/>
+          <text x="380" y="82" text-anchor="middle" class="wh" data-i18n="dt.d2.3a">Optimal control</text>
+          <text x="380" y="104" text-anchor="middle" class="sm wh" data-i18n="dt.d2.3b">Dynamic</text>
+          <text x="380" y="122" text-anchor="middle" class="sm wh" data-i18n="dt.d2.3c">Programming</text></g>
+        <g class="node"><rect x="473" y="40" width="130" height="110" rx="16" fill="#1B3A6B"/>
+          <text x="538" y="82" text-anchor="middle" class="wh" data-i18n="dt.d2.4a">Energy bill</text>
+          <text x="538" y="104" text-anchor="middle" class="sm wh" data-i18n="dt.d2.4b">energy and</text>
+          <text x="538" y="122" text-anchor="middle" class="sm wh" data-i18n="dt.d2.4c">demand charges</text></g>
+        <g class="node"><rect x="624" y="40" width="130" height="110" rx="16" fill="#F5B335"/>
+          <text x="689" y="82" text-anchor="middle" data-i18n="dt.d2.5a">LCOS</text>
+          <text x="689" y="104" text-anchor="middle" class="sm" style="fill:#14243D" data-i18n="dt.d2.5b">cost of storing</text>
+          <text x="689" y="122" text-anchor="middle" class="sm" style="fill:#14243D" data-i18n="dt.d2.5c">each kWh</text></g>
+        <g stroke="#1B3A6B" stroke-width="3" class="flow">
+          <line x1="138" y1="95" x2="154" y2="95" marker-end="url(#ah2)"/><line x1="289" y1="95" x2="305" y2="95" marker-end="url(#ah2)"/>
+          <line x1="454" y1="95" x2="470" y2="95" marker-end="url(#ah2)"/><line x1="605" y1="95" x2="621" y2="95" marker-end="url(#ah2)"/></g>
+        <text x="380" y="188" text-anchor="middle" class="sm" data-i18n="dt.d2.foot">Everything is simulated hour by hour over the whole of 2022, in MATLAB.</text>
+      </svg>
+    </figure>
+
+    <h3 class="sub reveal" data-i18n="dt.bat.c.h">The system that was simulated</h3>
+    <div class="two">
+      <div class="prose reveal rv-left">
+        <p data-i18n="dt.bat.c.p1">A "behind the meter" plant: a commercial building, a wind turbine and a long-duration battery connected to the grid. The building and the wind are uncontrollable; the battery is the only thing the optimizer decides.</p>
+        <p data-i18n="dt.bat.c.p2">The battery is modelled cell by cell with an equivalent circuit built on experimental measurements, including its internal resistance and the efficiency of the converter, so charging and discharging are not "free".</p>
+        <p data-i18n="dt.bat.c.p3">Dynamic Programming looks at the whole year and finds the cheapest sequence of charge and discharge decisions. Demand charges are then computed on the resulting grid power peaks.</p>
+      </div>
+      <table class="spec reveal rv-right">
+        <caption data-i18n="dt.bat.c.cap">Case study inputs</caption>
+        <tbody>
+          <tr><th data-i18n="dt.bat.c.r1">Battery</th><td data-i18n="dt.bat.c.v1">752 kWh sodium metal halide, 526 kWh usable (SoC 10 to 80%), up to 10 h discharge</td></tr>
+          <tr><th data-i18n="dt.bat.c.r2">Wind turbine</th><td data-i18n="dt.bat.c.v2">250 kW, wind data for 2022, power bought through a PPA</td></tr>
+          <tr><th data-i18n="dt.bat.c.r3">Building</th><td data-i18n="dt.bat.c.v3">Research building at Ohio State, 882 MWh of grid energy per year</td></tr>
+          <tr><th data-i18n="dt.bat.c.r4">Electricity price</th><td data-i18n="dt.bat.c.v4">Hourly real-time market price for 2022</td></tr>
+          <tr><th data-i18n="dt.bat.c.r5">Demand charge</th><td data-i18n="dt.bat.c.v5">$7.01 per kW of monthly peak, 150 kW threshold</td></tr>
+          <tr><th data-i18n="dt.bat.c.r6">Project life</th><td data-i18n="dt.bat.c.v6">20 years, with a cell replacement after 15</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.bat.d.h">Five scenarios</h3>
+    <div class="scn stagger">
+      <article class="reveal"><h4 data-i18n="dt.bat.d.1h">1A. Arbitrage</h4><p data-i18n="dt.bat.d.1p">The battery supports the building by buying cheap and avoiding expensive hours. Demand charges are not part of the optimization.</p></article>
+      <article class="reveal"><h4 data-i18n="dt.bat.d.2h">1B. Arbitrage + peak shaving</h4><p data-i18n="dt.bat.d.2p">As 1A, but the optimizer also caps the power drawn from the grid to cut demand charges.</p></article>
+      <article class="reveal"><h4 data-i18n="dt.bat.d.3h">1C. Adding wind</h4><p data-i18n="dt.bat.d.3p">As 1B, plus power from a wind turbine under a Power Purchase Agreement.</p></article>
+      <article class="reveal"><h4 data-i18n="dt.bat.d.4h">2. Battery alone</h4><p data-i18n="dt.bat.d.4p">No building: the battery only trades energy with the grid, as a pure arbitrage business.</p></article>
+      <article class="reveal"><h4 data-i18n="dt.bat.d.5h">3. Battery at a wind farm</h4><p data-i18n="dt.bat.d.5p">The battery delays the wind farm's sales to the hours when the price is higher.</p></article>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.bat.e.h">What the optimal control does</h3>
+    <div class="prose reveal">
+      <p data-i18n="dt.bat.e.p1">The optimizer charges when electricity is cheap, discharges when it is expensive, and shaves the building's power peaks. It also plans across days. In the April 2022 example of the paper, it keeps storing energy from day 14 to day 17 so that on day 18 the battery can cover most of the building's demand, avoiding a costly day.</p>
+      <p data-i18n="dt.bat.e.p2">That is the point of long duration: the value is not only in the instant price, but in moving energy through time, and in the demand charge it saves on the way.</p>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.bat.f.h">Results: the bill goes down</h3>
+    <figure class="fig reveal">
+      <h4 data-i18n="dt.bat.f.fig">Yearly electricity bill (2022)</h4>
+      <div class="cj" data-chart="bat-bill"></div>
+      <p class="cap" data-i18n-html="dt.bat.f.cap"><b>Savings:</b> 6.3% in 1A, 20.4% in 1B and 32.4% in 1C. Wind alone accounts for 16.9 points of the last one. Note: in the paper's table the 1B parts add up to $70,203, while its stated total is $71,413; the totals shown here are the stated ones.</p>
+    </figure>
+    <div class="callout blue reveal"><span data-i18n-html="dt.bat.f.call"><b>A surprise in 1A.</b> Its demand charges ($25,219) are higher than with no battery ($22,131). To exploit very low prices, the optimizer charges at full power and creates a grid peak higher than the building's own. 1B fixes this by limiting the peak.</span></div>
+
+    <h3 class="sub reveal" data-i18n="dt.bat.g.h">The catch: storing energy still costs more</h3>
+    <div class="prose reveal">
+      <p data-i18n="dt.bat.g.p1">With the operation known hour by hour, the LCOS can be computed properly: $0.23 to $0.26 per kWh for the building scenarios. Multiplying it by the energy the battery handles in a year gives what it costs to store that energy. Comparing that with what the battery earns or saves tells you whether the investment pays back.</p>
+    </div>
+    <figure class="fig reveal">
+      <h4 data-i18n="dt.bat.g.fig">Benefit versus cost, per year</h4>
+      <div class="cj" data-chart="bat-catch"></div>
+      <p class="cap" data-i18n-html="dt.bat.g.cap"><b>Green is what the battery brings; red is what storing that energy costs.</b> In every scenario the cost is higher. Scenario 1C comes closest ($29,091 against $35,861), and it assumes the wind turbine is already there for free.</p>
+    </figure>
+
+    <h3 class="sub reveal" data-i18n="dt.bat.h.h">Would another chemistry change the answer?</h3>
+    <div class="prose reveal">
+      <p data-i18n="dt.bat.h.p1">The same optimal control was applied to the cost data of other battery types for Scenario 2. Lithium-ion (LFP) is the cheapest to store with, at $0.1726 per kWh. But for that scenario to break even, the LCOS would need to fall to about $0.1173 per kWh, roughly half of today's value, and the DOE target for 2030 is lower still.</p>
+    </div>
+    <figure class="fig reveal">
+      <h4 data-i18n="dt.bat.h.fig">LCOS by battery chemistry (Scenario 2)</h4>
+      <div class="cj" data-chart="bat-chem"></div>
+      <p class="cap" data-i18n-html="dt.bat.h.cap"><b>Dollars per stored kWh.</b> No chemistry reaches the break-even line, so pure arbitrage still does not repay the investment.</p>
+    </figure>
+
+    <h3 class="sub reveal" data-i18n="dt.bat.i.h">Takeaways</h3>
+    <div class="prose reveal">
+      <ul>
+        <li data-i18n-html="dt.bat.i.l1"><b>Operationally, it works.</b> A long-duration battery can cut a commercial building's bill by up to 20.4%, and by 32.4% together with wind.</li>
+        <li data-i18n-html="dt.bat.i.l2"><b>Economically, not yet.</b> At current cost assumptions the cost of storage exceeds savings and revenues in every scenario.</li>
+        <li data-i18n-html="dt.bat.i.l3"><b>Method matters.</b> Putting optimal control and real data inside the cost analysis changes the answer compared with a lumped calculation, and shows how scenarios differ.</li>
+      </ul>
+    </div>
+    <div class="btn-row back"><a class="btn btn-line" href="index.html#proj-battery" data-i18n="dt.backproj">Back to the project card</a></div>
+  </div>
+</section>
+
+<!-- ===================== PV PROJECT ===================== -->
+<section class="detail" id="pv" data-toc="dt.j3">
+  <div class="wrap">
+    <div class="d-top reveal"><span class="tagline green" data-i18n="dt.pv.tag">Personal project, ongoing</span></div>
+    <h2 class="reveal" data-i18n="dt.pv.h">How close can we get to energy independence?</h2>
+    <p class="d-meta reveal" data-i18n="dt.pv.meta">A family-owned domestic solar installation, hourly production data and a modelling mindset. This page is still being written.</p>
+
+    <!-- PLACEHOLDERS: replace each .ph-box below with real content (text, charts, tables) when ready. -->
+    <div class="ph-grid stagger">
+      <div class="ph-box reveal"><b data-i18n="dt.pv.p1">The installation</b><small data-i18n="dt.pv.p1s">Coming soon: size of the plant, location, orientation and how the data is collected.</small></div>
+      <div class="ph-box reveal"><b data-i18n="dt.pv.p2">The data</b><small data-i18n="dt.pv.p2s">Coming soon: production versus expected output, consumption profile and market prices.</small></div>
+      <div class="ph-box reveal"><b data-i18n="dt.pv.p3">The findings</b><small data-i18n="dt.pv.p3s">Coming soon: what the numbers say about self-consumption and energy independence.</small></div>
+      <div class="ph-box reveal"><b data-i18n="dt.pv.p4">What's next</b><small data-i18n="dt.pv.p4s">Coming soon: adding a battery, a heat pump and, maybe, going off grid.</small></div>
+    </div>
+
+    <h3 class="sub reveal" data-i18n="dt.pv.c.h">A first look at the data</h3>
+    <div class="two">
+      <figure class="chart reveal rv-left">
+        <button type="button" class="zoom" data-zoom="images/solar-daily-profile.png" data-title="A typical day of production" data-cap="Energy produced by hour of the day. The line is the median day, the bands show how much days vary." data-i18n-attr="data-title:ix.c1.t;data-cap:ix.c1.z">
+          <img src="images/solar-daily-profile.png" alt="Chart of the energy produced by the solar panels for each hour of the day. The median day peaks at around 27 kWh at 1 pm, with wide variation between sunny and cloudy days." data-i18n-attr="alt:ix.c1.alt" width="1483" height="732" loading="lazy">
+        </button>
+        <figcaption data-i18n-html="ix.c1.cap"><b>A typical day.</b> Energy produced hour by hour: mean, median and percentiles.</figcaption>
+      </figure>
+      <figure class="chart reveal rv-right">
+        <button type="button" class="zoom" data-zoom="images/solar-price-vs-production.png" data-title="Price vs. production" data-cap="Each dot is one hour. The more the panels produce, the lower the zonal price tends to be." data-i18n-attr="data-title:ix.c2.t;data-cap:ix.c2.z">
+          <img src="images/solar-price-vs-production.png" alt="Scatter chart of hourly zonal electricity price against hourly solar production. The price tends to fall as production rises, by about 1.65 EUR per MWh for each extra kWh." data-i18n-attr="alt:ix.c2.alt" width="1378" height="732" loading="lazy">
+        </button>
+        <figcaption data-i18n-html="ix.c2.cap"><b>Production / Price.</b> Each dot is one hour. When the panels produce more, the electricity price tends to be lower: that's simple supply and demand.</figcaption>
+      </figure>
+    </div>
+    <div class="btn-row back"><a class="btn btn-line" href="index.html#proj-pv" data-i18n="dt.backproj">Back to the project card</a></div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <h2 class="reveal" data-i18n="dt.ct.h">Questions about any of this?</h2>
+    <p class="lede reveal" data-i18n="dt.ct.p">I enjoy talking about the details, and about what I would do differently today.</p>
+    <div class="actions reveal">
+      <a class="btn btn-red" href="index.html#contact" data-i18n="nav.contact">Get in touch</a>
+      <a class="btn btn-line" href="index.html" data-i18n="dt.back">Back to the main page</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<script src="js/i18n.js"></script>
+<script src="js/strings.js"></script>
+<script src="js/site.js"></script>
+<script src="js/viewer.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/toc.js"></script>
+</body>
+</html>

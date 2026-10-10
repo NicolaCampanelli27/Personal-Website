@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="pe.title">Nicola | The personal side</title>
+<meta name="description" content="Beyond engineering: cars, training, mountains, reading, and a tiny game about Nicola's journey." data-i18n-attr="content:pe.desc">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-page="personal">
+
+<header class="page-hero" id="top">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="wrap">
+    <h1 data-i18n="pe.h1">The personal side</h1>
+    <p data-i18n="pe.sub">Engineering is what I do. That is not what defines who I am. Here are the things that do.</p>
+    <div class="jump">
+      <a href="#beyond" data-i18n="pe.j1">Beyond work</a>
+      <a href="#play" data-i18n="pe.j2">My journey, the game</a>
+      <a href="index.html" data-i18n="pe.j3">Back to the main page</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="beyond">
+  <div class="wrap">
+    <h2 class="reveal" data-i18n="pe.beyond.h">Beyond work</h2>
+    <p class="lede reveal" data-i18n="pe.beyond.lede">Engineering is what I do. That is not what defines who I am.</p>
+    <div class="passions stagger">
+      <article class="passion p-red reveal rv-zoom" data-gallery="motor">
+        <div class="em" aria-hidden="true">🏎️</div>
+        <h3 data-i18n="pe.p1.h">Cars, bikes and that sense of speed</h3>
+        <p data-i18n="pe.p1.p">This is where it all started. From a youth reckless driving to the mature joy of driving and travelling. Behind a steering wheel or on a bike's seat is where a part of me belongs.</p>
+        <button type="button" class="see-btn" data-i18n="pe.see">See photos</button>
+      </article>
+      <article class="passion p-amber reveal rv-zoom" data-gallery="fit">
+        <div class="em" aria-hidden="true">🏋️</div>
+        <h3 data-i18n="pe.p2.h">Training</h3>
+        <p data-i18n="pe.p2.p">I fell for CrossFit first, then powerlifting and circuit training, and later triathlon and climbing. Fitness became a big part of my identity and I have no intention to quit despite everything.</p>
+        <button type="button" class="see-btn" data-i18n="pe.see">See photos</button>
+      </article>
+      <article class="passion p-pine reveal rv-zoom" data-gallery="mountains">
+        <div class="em" aria-hidden="true">⛰️</div>
+        <h3 data-i18n="pe.p3.h">The Mountains</h3>
+        <p data-i18n="pe.p3.p">Hiking has always been there. From our family holidays in the Alps, through 8 years of being a Scout (once a Scout, always a Scout), to discovering climbing. Can't wait to be back.</p>
+        <button type="button" class="see-btn" data-i18n="pe.see">See photos</button>
+      </article>
+      <article class="passion p-navy reveal rv-zoom" data-gallery="intro">
+        <div class="em" aria-hidden="true">📖</div>
+        <h3 data-i18n="pe.p4.h">Introspection</h3>
+        <p data-i18n="pe.p4.p">I have always talked a lot with myself. That is not necessarily an advantage, the other way round if something. But I truly believe a soliloquy could be life-changing. Reading good books is usually a great tool: most of the answers we look for in life have been already addressed by someone else.</p>
+        <button type="button" class="see-btn" data-i18n="pe.see">See photos</button>
+      </article>
+    </div>
+    <div class="knee reveal">
+      <strong data-i18n="pe.knee.h">Right now:</strong> <span data-i18n="pe.knee.p">a knee injury has kept me away from sport for about two and a half years. I'm still working (and hoping) on getting back, slowly and with much more patience than I used to have.</span>
+    </div>
+  </div>
+</section>
+
+<section id="play" class="play">
+  <div class="wrap">
+    <h2 class="reveal" data-i18n="pe.play.h">My journey so far</h2>
+    <p class="lede reveal" data-i18n="pe.play.lede">A tiny game about my path so far. Yes, that's a knee brace. Run through the places that made me, jump what's in your way, and mind the knee: every jump loads it, so don't jump more than you need. Patience wins.</p>
+    <div class="game-box reveal rv-zoom">
+      <canvas id="game" tabindex="0" aria-label="My journey so far game. Press space or tap to jump over obstacles and keep going without overloading the knee." data-i18n-attr="aria-label:pe.play.aria"></canvas>
+    </div>
+    <p class="hint" data-i18n="pe.play.hint">Press Space or the up arrow, or tap the game, to jump.</p>
+    <p class="game-msg" id="game-msg" aria-live="polite"></p>
+    <div class="game-cta" id="game-cta" hidden><a class="btn btn-red" href="index.html#contact" data-i18n="pe.play.cta">Say hi</a></div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <h2 class="reveal" data-i18n="pe.ct.h">Liked what you saw?</h2>
+    <p class="lede reveal" data-i18n="pe.ct.p">Say hi, ask me about the knee, or tell me about your favorite road.</p>
+    <div class="actions reveal">
+      <a class="btn btn-red" href="index.html#contact" data-i18n="nav.contact">Get in touch</a>
+      <a class="btn btn-line" href="index.html" data-i18n="pe.back">Back to the main page</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<script src="js/i18n.js"></script>
+<script src="js/strings.js"></script>
+<script src="js/site.js"></script>
+<script src="js/viewer.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
