@@ -269,7 +269,13 @@
     <p class="or reveal" data-i18n="ix.ct.or">Or find me here</p>
     <div class="actions reveal">
       <a class="btn btn-dark" href="https://www.linkedin.com/in/nicola-campanelli" target="_blank" rel="noopener" data-i18n="ix.linkedin">Connect on LinkedIn</a>
-      <a class="btn btn-line" href="Nicola_Campanelli_CV.pdf" target="_blank" rel="noopener" data-i18n="ix.cv">Download my CV</a>
+      <div class="cv-menu" id="cv-menu">
+        <button type="button" class="btn btn-line cv-btn" aria-haspopup="true" aria-expanded="false" aria-controls="cv-list"><span data-i18n="ix.cv">Download my CV</span><i class="caret"></i></button>
+        <ul class="cv-list" id="cv-list">
+          <li><a href="Nicola_Campanelli_CV_Clean.pdf" download="Nicola_Campanelli_CV_Clean.pdf"><b data-i18n="ix.cv.clean">Clean CV</b><small data-i18n="ix.cv.clean.d">Single column, made in LaTeX</small></a></li>
+          <li><a href="Nicola_Campanelli_CV_Picture.pdf" download="Nicola_Campanelli_CV_Picture.pdf"><b data-i18n="ix.cv.pic">Picture CV</b><small data-i18n="ix.cv.pic.d">Two columns, with my profile picture</small></a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>

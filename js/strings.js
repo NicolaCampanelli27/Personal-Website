@@ -472,6 +472,22 @@ window.STRINGS = {
     en: "Download my CV",
     it: "Scarica il mio CV"
   },
+  "ix.cv.clean": {
+    en: "Clean CV",
+    it: "CV pulito"
+  },
+  "ix.cv.clean.d": {
+    en: "Single column, made in LaTeX",
+    it: "Una colonna, fatto in LaTeX"
+  },
+  "ix.cv.pic": {
+    en: "Picture CV",
+    it: "CV con foto"
+  },
+  "ix.cv.pic.d": {
+    en: "Two columns, with my profile picture",
+    it: "Due colonne, con la mia foto profilo"
+  },
   "ix.desc": {
     en: "Nicola Campanelli is a simulation engineer from Torino, Italy, working on hybrid vehicles, energy management and battery storage.",
     it: "Nicola Campanelli è un ingegnere di simulazione di Torino che lavora su veicoli ibridi, gestione dell'energia e accumulo a batteria."
@@ -519,8 +535,8 @@ window.STRINGS = {
     it: "Il lato personale"
   },
   "pe.sub": {
-    en: "Engineering is what I do. That is not what defines who I am. Here are the things that do.",
-    it: "L'ingegneria è ciò che faccio. Non è ciò che mi definisce. Ecco le cose che lo fanno."
+    en: "Engineering is what I do. That is not what defines who I am.",
+    it: "L'ingegneria è ciò che faccio. Non è ciò che mi definisce."
   },
   "pe.j1": {
     en: "Beyond work",
@@ -529,10 +545,6 @@ window.STRINGS = {
   "pe.j2": {
     en: "My journey, the game",
     it: "Il mio percorso, il gioco"
-  },
-  "pe.j3": {
-    en: "Back to the main page",
-    it: "Torna alla pagina principale"
   },
   "pe.beyond.h": {
     en: "Beyond work",
@@ -601,14 +613,6 @@ window.STRINGS = {
   "pe.play.cta": {
     en: "Say hi",
     it: "Scrivimi"
-  },
-  "pe.ct.h": {
-    en: "Liked what you saw?",
-    it: "Ti è piaciuto?"
-  },
-  "pe.ct.p": {
-    en: "Say hi, ask me about the knee, or tell me about your favorite road.",
-    it: "Scrivimi, chiedimi del ginocchio o raccontami la tua strada preferita."
   },
   "pe.back": {
     en: "Back to the main page",

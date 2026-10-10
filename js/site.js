@@ -73,11 +73,21 @@
     });
   }
   document.addEventListener('click',e=>{
-    document.querySelectorAll('.has-pop.open,.has-drop.open').forEach(w=>{if(!w.contains(e.target))w.classList.remove('open')});
+    document.querySelectorAll('.has-pop.open,.has-drop.open,.cv-menu.open').forEach(w=>{if(!w.contains(e.target))w.classList.remove('open')});
   });
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape')document.querySelectorAll('.has-pop.open,.has-drop.open').forEach(w=>w.classList.remove('open'));
+    if(e.key==='Escape')document.querySelectorAll('.has-pop.open,.has-drop.open,.cv-menu.open').forEach(w=>w.classList.remove('open'));
   });
+
+  /* ---------- CV menu: click or tap toggles it (hover/focus also open it on desktop) ---------- */
+  const cv=document.getElementById('cv-menu');
+  if(cv){
+    const cb=cv.querySelector('.cv-btn');
+    cb.addEventListener('click',()=>{const o=cv.classList.toggle('open');cb.setAttribute('aria-expanded',String(o))});
+    cv.addEventListener('focusin',()=>cb.setAttribute('aria-expanded','true'));
+    cv.addEventListener('focusout',e=>{if(!cv.contains(e.relatedTarget))cb.setAttribute('aria-expanded',String(cv.classList.contains('open')))});
+    cv.querySelectorAll('.cv-list a').forEach(a=>a.addEventListener('click',()=>{cv.classList.remove('open');cb.setAttribute('aria-expanded','false')}));
+  }
 
   /* ---------- Scroll reveal: animates when sections enter, scrolling down or up ---------- */
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
